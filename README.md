@@ -1,1 +1,1 @@
-"#Kata_mini-pricer" 
+# Kata mini-pricer 
