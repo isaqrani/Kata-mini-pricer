@@ -3,7 +3,7 @@ package org.mini.pricer;
 public class RandomVolatilityStrategy implements VolatilityStrategy {
 
     @Override
-    public Double randomise(Double volatility) {
+    public Double randomise(final Double volatility) {
         double random = Math.random();
         double trend = 0;
         if(random < 0.33) {
