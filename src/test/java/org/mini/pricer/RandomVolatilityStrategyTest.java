@@ -18,7 +18,7 @@ public class RandomVolatilityStrategyTest {
 
     @Test
     public void should_generate_a_random(){
-        Double actualRandomVolatility = randomVolatilityStrategy.randomise(volatility)
+        Double actualRandomVolatility = randomVolatilityStrategy.randomise(volatility);
         List<Double> expectedVolatilities = Arrays.asList(-1d, 0d, 1d);
         assertThat(actualRandomVolatility).isIn(expectedVolatilities);
     }
