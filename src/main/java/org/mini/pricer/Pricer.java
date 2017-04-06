@@ -1,8 +1,9 @@
 package org.mini.pricer;
 
+import org.mini.pricer.volatility.VolatilityStrategy;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-
 import java.util.Arrays;
 import java.util.List;
 

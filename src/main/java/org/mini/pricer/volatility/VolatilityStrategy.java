@@ -1,5 +1,4 @@
-package org.mini.pricer;
-
+package org.mini.pricer.volatility;
 
 public interface VolatilityStrategy {
 

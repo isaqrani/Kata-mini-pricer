@@ -1,6 +1,6 @@
-package org.mini.pricer;
+package org.mini.pricer.volatility;
 
-public class DeterministicVolatilityStrategy implements VolatilityStrategy{
+public class DeterministicVolatilityStrategy implements VolatilityStrategy {
 
     private double[] values = { -1, 0, 1 };
     private int current = 0;
