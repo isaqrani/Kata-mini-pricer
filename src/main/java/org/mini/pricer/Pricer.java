@@ -6,16 +6,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Pricer {
-
+    private List<LocalDate> holidays = Arrays.asList(LocalDate.of(2017,5,1), LocalDate.of(2017,5,8));
     private VolatilityStrategy strategy;
 
-    public Pricer(VolatilityStrategy volatilityStrategy) {
+    public Pricer(final VolatilityStrategy volatilityStrategy) {
         this.strategy = volatilityStrategy;
     }
 
-    private List<LocalDate> holidays = Arrays.asList(LocalDate.of(2017,5,1), LocalDate.of(2017,5,8));
-
-    public Double priceAt(LocalDate startDate, LocalDate targetedDate, Double price, Double volatility) {
+    public Double priceAt(final LocalDate startDate,final LocalDate targetedDate, Double price, Double volatility) {
 
         if(startDate.toEpochDay() == targetedDate.toEpochDay()){
             return price;
