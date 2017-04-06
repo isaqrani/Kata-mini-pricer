@@ -6,7 +6,7 @@ public class DeterministicVolatilityStrategy implements VolatilityStrategy{
     private int current = 0;
 
     @Override
-    public Double randomise(Double volatility) {
+    public Double randomise(final Double volatility) {
         return values[current==3 ? 0 : current++];
     }
 }
