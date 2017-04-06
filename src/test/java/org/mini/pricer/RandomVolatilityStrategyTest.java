@@ -15,7 +15,7 @@ public class RandomVolatilityStrategyTest {
 
     @Before
     public void initialise(){
-        RandomVolatilityStrategy randomVolatilityStrategy = new RandomVolatilityStrategy();
+        randomVolatilityStrategy = new RandomVolatilityStrategy();
         volatility = 1d;
     }
 
