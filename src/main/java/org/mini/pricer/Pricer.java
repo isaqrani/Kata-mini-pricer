@@ -7,6 +7,12 @@ import java.util.List;
 
 public class Pricer {
 
+    private VolatilityStrategy strategy;
+
+    public Pricer(VolatilityStrategy volatilityStrategy) {
+        this.strategy = volatilityStrategy;
+    }
+
     private List<LocalDate> holidays = Arrays.asList(LocalDate.of(2017,5,1), LocalDate.of(2017,5,8));
 
     public Double priceAt(LocalDate startDate, LocalDate targetedDate, Double price, Double volatility) {
@@ -15,7 +21,7 @@ public class Pricer {
             return price;
         }else{
             Double calculatedPrice =  priceAt(nextDay(startDate), targetedDate, price, volatility);
-            return calculatedPrice * (1 + volatility/100);
+            return calculatedPrice * (1 + strategy.randomise(volatility)/100);
         }
     }
 
