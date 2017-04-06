@@ -44,7 +44,7 @@ public class RandomVolatilityStrategyTest {
         assertThat(actualRandomVolatility).isEqualTo(1);
     }
 
-    private void mockRandom(Double forcedValue) {
+    private void mockRandom(final Double forcedValue) {
         PowerMock.mockStatic(Math.class);
         EasyMock.expect(Math.random()).andReturn(forcedValue).once();
         PowerMock.replay(Math.class);
