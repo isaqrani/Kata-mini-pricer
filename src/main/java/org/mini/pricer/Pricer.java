@@ -18,7 +18,7 @@ public class Pricer {
 
     public Double priceAt(final LocalDate startDate,final LocalDate targetedDate, final Double price,final Double volatility) {
 
-        if(startDate.toEpochDay() == targetedDate.toEpochDay()){
+        if(startDate.toEpochDay() >= targetedDate.toEpochDay()){
             return price;
         }else{
             Double calculatedPrice =  priceAt(nextDay(startDate), targetedDate, price, volatility);
