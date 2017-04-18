@@ -27,7 +27,8 @@ public class Pricer {
     }
 
     private LocalDate nextDay(final LocalDate date) {
-        return skipWeekends(skipHolidays(date));
+        LocalDate nextDay = skipWeekends(skipHolidays(date));
+        return isWorkingDay(nextDay) ? nextDay : nextDay(nextDay);
     }
 
     private LocalDate skipWeekends(final LocalDate date) {
@@ -45,5 +46,18 @@ public class Pricer {
             return date.plusDays(1);
         }
         return date;
+    }
+
+    private LocalDate skipHolidays(final  LocalDate date){
+        if(holidays.contains(date)){
+            return date.plusDays(1);
+        }
+        return date;
+    }
+    
+    private LocalDate isWorkingDay(final LocalDate date) {        
+        return !date.getDayOfWeek().equals(DayOfWeek.SATURDAY) && 
+            !date.getDayOfWeek().equals(DayOfWeek.SUNDAY) && 
+            !holidays.contains(date);
     }
 }
