@@ -47,13 +47,6 @@ public class Pricer {
         }
         return date;
     }
-
-    private LocalDate skipHolidays(final  LocalDate date){
-        if(holidays.contains(date)){
-            return date.plusDays(1);
-        }
-        return date;
-    }
     
     private LocalDate isWorkingDay(final LocalDate date) {        
         return !date.getDayOfWeek().equals(DayOfWeek.SATURDAY) && 
