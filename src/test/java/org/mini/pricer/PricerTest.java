@@ -85,7 +85,7 @@ public class PricerTest {
     @Test
     public void should_skip_holidays_and_weekends_and_holidayes_again(){
         LocalDate startDate = LocalDate.of(2017,6,14);
-        LocalDate targetedDate = LocalDate.of(2017,6,20);
+        LocalDate targetedDate = LocalDate.of(2017,6,21);
 
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
