@@ -48,7 +48,7 @@ public class Pricer {
         return date;
     }
     
-    private LocalDate isWorkingDay(final LocalDate date) {        
+    private boolean isWorkingDay(final LocalDate date) {        
         return !date.getDayOfWeek().equals(DayOfWeek.SATURDAY) && 
             !date.getDayOfWeek().equals(DayOfWeek.SUNDAY) && 
             !holidays.contains(date);
