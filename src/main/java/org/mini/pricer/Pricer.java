@@ -16,18 +16,18 @@ public class Pricer {
         this.strategy = volatilityStrategy;
     }
 
-    public Double priceAt(LocalDate startDate,final LocalDate targetedDate, final Double price,final Double volatility) {
+    public Double priceAt(final LocalDate startDate,final LocalDate targetedDate, final Double price,final Double volatility) {
 
-        startDate = adjustStartDate(startDate);
-        if(startDate.toEpochDay() >= targetedDate.toEpochDay()){
+        LocalDate start = adjustStartDate(startDate);
+        if(start.toEpochDay() >= targetedDate.toEpochDay()){
             return price;
         }else{
-            Double calculatedPrice =  priceAt(nextDay(startDate), targetedDate, price, volatility);
+            Double calculatedPrice =  priceAt(nextDay(start), targetedDate, price, volatility);
             return calculatedPrice * (1 + strategy.randomise(volatility)/100);
         }
     }
 
-    private LocalDate nextDay(LocalDate date) {
+    private LocalDate nextDay(final LocalDate date) {
         return isWorkingDay(date.plusDays(1))  ? date.plusDays(1) : nextDay(date.plusDays(1));
     }
 
@@ -37,11 +37,12 @@ public class Pricer {
             !holidays.contains(date);
     }
 
-    private LocalDate adjustStartDate(LocalDate date){
-        while (!isWorkingDay(date)){
-            date = date.plusDays(1);
+    private LocalDate adjustStartDate(final LocalDate date){
+        LocalDate nextWorkingDate = date;
+        while (!isWorkingDay(nextWorkingDate)){
+            nextWorkingDate = date.plusDays(1);
         }
-        return date;
+        return nextWorkingDate;
     }
 
 }
