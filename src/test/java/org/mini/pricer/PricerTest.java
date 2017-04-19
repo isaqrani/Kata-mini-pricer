@@ -7,6 +7,7 @@ import org.mini.pricer.volatility.VolatilityStrategy;
 
 import java.time.LocalDate;
 
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PricerTest {
@@ -59,7 +60,7 @@ public class PricerTest {
 
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
-        assertThat(calculatedPrice).isEqualTo(99.99);
+        assertThat(calculatedPrice).isEqualTo(99);
     }
 
     @Test
@@ -82,7 +83,7 @@ public class PricerTest {
         assertThat(calculatedPrice).isEqualTo(99.99);
     }
     
-    /*
+
     @Test
     public void should_skip_holidays_and_weekends_and_holidayes_again(){
         LocalDate startDate = LocalDate.of(2017,6,14);
@@ -91,7 +92,7 @@ public class PricerTest {
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
         assertThat(calculatedPrice).isEqualTo(99.99);
-    }*/
+    }
 
     @Test
     public void should_skip_holidays_and_weekends_and_holidayes_again_error(){
