@@ -16,8 +16,9 @@ public class Pricer {
         this.strategy = volatilityStrategy;
     }
 
-    public Double priceAt(final LocalDate startDate,final LocalDate targetedDate, final Double price,final Double volatility) {
+    public Double priceAt(LocalDate startDate,final LocalDate targetedDate, final Double price,final Double volatility) {
 
+        startDate = adjustStartDate(startDate);
         if(startDate.toEpochDay() >= targetedDate.toEpochDay()){
             return price;
         }else{
@@ -26,31 +27,21 @@ public class Pricer {
         }
     }
 
-    private LocalDate nextDay(final LocalDate date) {
-        LocalDate nextDay = skipWeekends(skipHolidays(date));
-        return isWorkingDay(nextDay) ? nextDay : nextDay(nextDay);
+    private LocalDate nextDay(LocalDate date) {
+        return isWorkingDay(date.plusDays(1))  ? date.plusDays(1) : nextDay(date.plusDays(1));
     }
 
-    private LocalDate skipWeekends(final LocalDate date) {
-        if(date.getDayOfWeek().equals(DayOfWeek.FRIDAY)){
-            return date.plusDays(3);
-        }else if (date.getDayOfWeek().equals(DayOfWeek.SATURDAY)){
-            return date.plusDays(2);
-        }else{
-            return date.plusDays(1);
-        }
-    }
-
-    private LocalDate skipHolidays(final  LocalDate date){
-        if(holidays.contains(date)){
-            return date.plusDays(1);
-        }
-        return date;
-    }
-    
     private boolean isWorkingDay(final LocalDate date) {        
         return !date.getDayOfWeek().equals(DayOfWeek.SATURDAY) && 
             !date.getDayOfWeek().equals(DayOfWeek.SUNDAY) && 
             !holidays.contains(date);
     }
+
+    private LocalDate adjustStartDate(LocalDate date){
+        while (!isWorkingDay(date)){
+            date = date.plusDays(1);
+        }
+        return date;
+    }
+
 }
