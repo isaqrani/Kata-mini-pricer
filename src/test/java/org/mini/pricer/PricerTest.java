@@ -62,4 +62,24 @@ public class PricerTest {
         assertThat(calculatedPrice).isEqualTo(99);
     }
     
+    @Test
+    public void should_skip_holidays(){
+        LocalDate startDate = LocalDate.of(2017,5,1);
+        LocalDate targetedDate = LocalDate.of(2017,5,5);
+
+        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
+
+        assertThat(calculatedPrice).isEqualTo(99.99);
+    }
+
+    @Test
+    public void should_skip_holidays_and_weekends(){
+        LocalDate startDate = LocalDate.of(2017,5,5);
+        LocalDate targetedDate = LocalDate.of(2017,5,11);
+
+        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
+
+        assertThat(calculatedPrice).isEqualTo(99.99);
+    }
+    
 }
