@@ -7,7 +7,6 @@
     <groupId>mini-pricer</groupId>
     <artifactId>mini-pricer</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <name>Mini-pricer</name>
 
     <dependencies>
@@ -41,7 +40,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
         <plugins>
@@ -68,5 +66,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
