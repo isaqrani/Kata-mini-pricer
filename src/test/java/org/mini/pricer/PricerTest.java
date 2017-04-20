@@ -42,4 +42,24 @@ public class PricerTest {
 
         assertThat(calculatedPrice).isEqualTo(99.99);
     }
+    @Test
+    public void should_skip_weekend(){
+        LocalDate startDate = LocalDate.of(2017,3,17);
+        LocalDate targetedDate = LocalDate.of(2017,3,22);
+
+        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
+
+        assertThat(calculatedPrice).isEqualTo(99.99);
+    }
+
+    @Test
+    public void should_skip_weekend_when_start_day_is_saturday(){
+        LocalDate startDate = LocalDate.of(2017,3,18);
+        LocalDate targetedDate = LocalDate.of(2017,3,22);
+
+        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
+
+        assertThat(calculatedPrice).isEqualTo(99);
+    }
+    
 }
