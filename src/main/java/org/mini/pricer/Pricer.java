@@ -39,7 +39,7 @@ public class Pricer {
     private LocalDate adjustStartDate(final LocalDate date){
         LocalDate nextWorkingDate = date;
         while (!isWorkingDay(nextWorkingDate)){
-            nextWorkingDate = date.plusDays(1);
+            nextWorkingDate = nextWorkingDate.plusDays(1);
         }
         return nextWorkingDate;
     }
