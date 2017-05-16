@@ -2,7 +2,6 @@ package org.mini.pricer;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import org.mini.pricer.volatility.DeterministicVolatilityStrategy;
 import org.mini.pricer.volatility.VolatilityStrategy;
 
@@ -17,7 +16,7 @@ public class PricerTest {
     private Double volatility;
 
     @Before
-    public void initialise(){
+    public void initialise() {
         VolatilityStrategy strategy = new DeterministicVolatilityStrategy();
         pricer = new Pricer(strategy);
         price = 100d;
@@ -25,27 +24,18 @@ public class PricerTest {
     }
 
     @Test
-    public void should_not_change_the_price_for_the_same_day(){
-        LocalDate startDate = LocalDate.of(2017,3,14);
+    public void should_not_change_the_price_for_the_same_day() {
+        LocalDate startDate = LocalDate.of(2017, 3, 14);
 
         Double calculatedPrice = pricer.priceAt(startDate, startDate, price, volatility);
 
         assertThat(calculatedPrice).isEqualTo(price);
     }
-    
-     @Test
-    public void should_change_the_price_for_other_day(){
-        LocalDate startDate = LocalDate.of(2017,3,14);
-        LocalDate targetedDate = LocalDate.of(2017,3,17);
 
-        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
-
-        assertThat(calculatedPrice).isEqualTo(99.99);
-    }
     @Test
-    public void should_skip_weekend(){
-        LocalDate startDate = LocalDate.of(2017,3,17);
-        LocalDate targetedDate = LocalDate.of(2017,3,22);
+    public void should_change_the_price_for_other_day() {
+        LocalDate startDate = LocalDate.of(2017, 3, 14);
+        LocalDate targetedDate = LocalDate.of(2017, 3, 17);
 
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
@@ -53,19 +43,29 @@ public class PricerTest {
     }
 
     @Test
-    public void should_skip_weekend_when_start_day_is_saturday(){
-        LocalDate startDate = LocalDate.of(2017,3,18);
-        LocalDate targetedDate = LocalDate.of(2017,3,22);
+    public void should_skip_weekend() {
+        LocalDate startDate = LocalDate.of(2017, 3, 17);
+        LocalDate targetedDate = LocalDate.of(2017, 3, 22);
+
+        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
+
+        assertThat(calculatedPrice).isEqualTo(99.99);
+    }
+
+    @Test
+    public void should_skip_weekend_when_start_day_is_saturday() {
+        LocalDate startDate = LocalDate.of(2017, 3, 18);
+        LocalDate targetedDate = LocalDate.of(2017, 3, 22);
 
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
         assertThat(calculatedPrice).isEqualTo(99);
     }
-    
+
     @Test
-    public void should_skip_holidays(){
-        LocalDate startDate = LocalDate.of(2017,5,1);
-        LocalDate targetedDate = LocalDate.of(2017,5,5);
+    public void should_skip_holidays() {
+        LocalDate startDate = LocalDate.of(2017, 5, 1);
+        LocalDate targetedDate = LocalDate.of(2017, 5, 5);
 
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
@@ -73,19 +73,9 @@ public class PricerTest {
     }
 
     @Test
-    public void should_skip_holidays_and_weekends(){
-        LocalDate startDate = LocalDate.of(2017,5,5);
-        LocalDate targetedDate = LocalDate.of(2017,5,11);
-
-        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
-
-        assertThat(calculatedPrice).isEqualTo(99.99);
-    }
-    
-     @Test
-    public void should_skip_holidays_and_weekends_and_holidays_again(){
-        LocalDate startDate = LocalDate.of(2017,6,14);
-        LocalDate targetedDate = LocalDate.of(2017,6,21);
+    public void should_skip_holidays_and_weekends() {
+        LocalDate startDate = LocalDate.of(2017, 5, 5);
+        LocalDate targetedDate = LocalDate.of(2017, 5, 11);
 
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
@@ -93,10 +83,20 @@ public class PricerTest {
     }
 
     @Test
-    public void should_skip_holidays_and_weekends_and_holidays_again_error(){
+    public void should_skip_holidays_and_weekends_and_holidays_again() {
+        LocalDate startDate = LocalDate.of(2017, 6, 14);
+        LocalDate targetedDate = LocalDate.of(2017, 6, 21);
 
-        LocalDate startDate = LocalDate.of(2017,6,14);
-        LocalDate targetedDate = LocalDate.of(2017,6,20);
+        Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
+
+        assertThat(calculatedPrice).isEqualTo(99.99);
+    }
+
+    @Test
+    public void should_skip_holidays_and_weekends_and_holidays_again_error() {
+
+        LocalDate startDate = LocalDate.of(2017, 6, 14);
+        LocalDate targetedDate = LocalDate.of(2017, 6, 20);
 
         Double calculatedPrice = pricer.priceAt(startDate, targetedDate, price, volatility);
 
