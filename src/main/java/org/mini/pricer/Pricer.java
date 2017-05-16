@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Pricer {
+    
     private List<LocalDate> holidays = Arrays.asList(LocalDate.of(2017,5,1), LocalDate.of(2017,5,8), LocalDate.of(2017,6,15), LocalDate.of(2017,6,19));
     
     private VolatilityStrategy strategy;
